@@ -22,11 +22,14 @@ var bgflg=true;
 canvas1.width=canvas1.clientWidth;
 canvas1.height=canvas1.clientHeight;
 
+
+//スマホ版
 canvas1.addEventListener('touchmove',function(e){
+    
     var rect=e.target.getBoundingClientRect();
     e.preventDefault();//タッチしたときにブラウザスクロールを防ぐ
-    x=e.tpuches[0].clientX-rect.left;//1本目の指
-    y=e.tpuches[0].clientY-rect.top;
+    x=e.touches[0].clientX-rect.left;//1本目の指
+    y=e.touches[0].clientY-rect.top;
     
     ctxfunc(e);
 
@@ -38,16 +41,20 @@ canvas1.addEventListener('touchmove',function(e){
         case 1:
         ctx1.fillRect(x,y,12,12);
         break;
+
         case 0:
             ctx1.fillRect(x,y,5,5);
             break;
-                case 3:
-                ctx1.fillRect(x,y,80,80);
-                break;
-            }
+
+        case 3:
+             ctx1.fillRect(x,y,80,80);
+            break;
+        }
 });
 
+//パソコン版
 canvas1.addEventListener('mousemove',function(e){
+    
     var rect=e.target.getBoundingClientRect();
     x=e.clientX-rect.left;
     y=e.clientY-rect.top;
@@ -71,9 +78,9 @@ canvas1.addEventListener('mousemove',function(e){
                 break;
             }
         }
-    
 });
 
+//お絵かき設定関数　一部
 function ctxfunc(e){
     li[0].innerHTML="X座標("+Math.floor(x)+")";
     li[1].innerHTML="Y座標("+Math.floor(y)+")";
@@ -92,8 +99,9 @@ function ctxfunc(e){
     midle.style.backgroundColor=colors.value;
     smole.style.backgroundColor=colors.value;
 }
+//ここまで関数
 
-
+//PCクリック時のみ描画フラグ
 canvas1.addEventListener('mousedown',function(e){
     mouseflg=true;
 });
@@ -102,9 +110,12 @@ canvas1.addEventListener('mouseup',function(e){
     mouseflg=false;
 });
 
+//ペンの大きさ
 larges.addEventListener('click',function(){
+    
     n=2;
     cleanflg=false;
+
     larges.style.border="solid 4px yellow";
     midle.style.border="solid 2px white";
     smole.style.border="solid 2px white";
@@ -112,7 +123,9 @@ larges.addEventListener('click',function(){
     clear.style.border="solid 2px white";
     smoleclear.style.border="solid 2px white";
 });
+
 midle.addEventListener('click',function(){
+    
     n=1;
     cleanflg=false;
 
@@ -123,7 +136,9 @@ midle.addEventListener('click',function(){
     clear.style.border="solid 2px white";
     smoleclear.style.border="solid 2px white";
 });
+
 smole.addEventListener('click',function(){
+    
     n=0;
     cleanflg=false;
 
@@ -134,7 +149,10 @@ smole.addEventListener('click',function(){
     clear.style.border="solid 2px white";
     smoleclear.style.border="solid 2px white";
 });
+
+//消しゴム大中小全消し
 largeclear.addEventListener('click',function(){
+    
     n=3;
     cleanflg=true;
 
@@ -145,7 +163,9 @@ largeclear.addEventListener('click',function(){
     clear.style.border="solid 2px white";
     smoleclear.style.border="solid 2px white";
 });
+
 clear.addEventListener('click',function(){
+    
     n=1;
     cleanflg=true;
 
@@ -156,7 +176,9 @@ clear.addEventListener('click',function(){
     clear.style.border="solid 4px yellow";
     smoleclear.style.border="solid 2px white";
 });
+
 smoleclear.addEventListener('click',function(){
+    
     n=0;
     cleanflg=true;
 
@@ -167,7 +189,9 @@ smoleclear.addEventListener('click',function(){
     clear.style.border="solid 2px white";
     smoleclear.style.border="solid 4px yellow";
 });
+
 allclear.addEventListener('click',function(){
+    
     canvas1.style.backgroundColor=colorbg.value;
     bgflg=false;
 });
